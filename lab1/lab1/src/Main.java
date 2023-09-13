@@ -4,25 +4,23 @@
 import java.lang.Math;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
-    double m;
-    double c;
-    double t;
-    double b;
-    double g;
+    private double m;
+    private double c;
+    private double t;
+    private double b;
+    private double g;
 
     public Main() {
-        m = c = t = b = g = 0;
+        m = c = t = b = g = 0.0;
     }
 
     public Main(double m, double c, double t, double b, double g) {
-        this.m = m;
-        this.c = c;
-        this.t = t;
-        this.b = b;
-        this.g = g;
+        setData(m,c,t,b,g);
     }
 
     public void setData(double m, double c, double t, double b, double g) {
@@ -42,24 +40,27 @@ public class Main {
         System.out.println("g: " + g);
     }
 
-    public double сalc_f() {
+    public double сalcF() {
         return Math.cbrt(m * t * g * t + Math.abs(c * Math.sin(t)));
     }
 
-    public double сalc_z() {
+    public double сalcZ() {
         return m * Math.cos(b *t * Math.sin(t)) + c;
     }
 
-    public void CurDate() {
-        System.out.println(java.time.LocalDateTime.now());
+    public void CurDate()
+    {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.h.m.s.S - D");
+        System.out.println(dateFormat.format(date));
     }
 
     public static void main(String[] args) {
         Main main = new Main();
         main.setData(2, -1, 1.2, 0.7, 1.9);
         main.getData();
-        System.out.println("f: " + main.сalc_f());
-        System.out.println("z: " + main.сalc_z());
+        System.out.println("f: " + main.сalcF());
+        System.out.println("z: " + main.сalcZ());
         main.CurDate();
     }
 }
