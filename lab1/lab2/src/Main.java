@@ -24,16 +24,16 @@ enum Insurance
 
 class Patient
 {
-    static int size = 0;
-    int id;
-    String surname;
-    String name;
-    String middlename;
-    String adress;
-    int phone;
-    int numMedCard;
-    Insurance insurance;
-    String diagnosis;
+    private static int size = 0;
+    private int id;
+    private String surname;
+    private String name;
+    private String middlename;
+    private String adress;
+    private int phone;
+    private int numMedCard;
+    private Insurance insurance;
+    private String diagnosis;
     public Patient(String surname, String name, String middlename, String adress, int phone, int numMedCard, Insurance insurance, String diagnosis)
     {
         id = ++size;
