@@ -1,17 +1,4 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-    public static void main(String[] args) {
-        Patient[] patients = new Patient[100];
-        patients[0] = new Patient("Pankiv", "Valentyn", "Victor", "Kozazhka, 6", 689246864, 19, Insurance.Stationary, "First degree burn");
-        patients[1] = new Patient("Slobodian", "Ruslan", "Olesh", "Sumonenka, 7", 976604825, 28, Insurance.Urgent, "First degree burn");
-        patients[2] = new Patient("Mahinskyy", "Ura", "Andriy", "Zluky, 3", 689491192, 10, Insurance.None, "Fracture of two arms");
-        patients[0].showPatientsData(patients);
-        patients[0].showDiagnosis(patients);
-        patients[0].showNumMedCard(patients);
-        patients[0].showNonInsurance(patients);
-    }
-}
+package patient;
 
 enum Insurance
 {
@@ -22,7 +9,7 @@ enum Insurance
     Dentistry
 }
 
-class Patient
+public class Patient
 {
     private static int size = 0;
     private int id;
@@ -54,33 +41,21 @@ class Patient
             System.out.println(patients[i].id + ".\nName: " + patients[i].name + "\nMiddlename: " + patients[i].middlename + "\nSurname: "  + patients[i].surname + "\nDiagnosis: " + patients[i].diagnosis);
         }
     }
-    public void showNumMedCard(Patient[] patients)
+    public void showNumMedCard(Patient[] patients, int minNum, int maxNum)
     {
-        Patient[] med = new Patient[size];
-        for(int i = 0; i < size; i++)
+        if(minNum < maxNum)
         {
-            med[i] = patients[i];
-        }
-        for(int i = 0; i < size; i++)
-        {
-            if(i != size - 1)
+            System.out.println("Interval from " + minNum + " to " + maxNum + ":\n");
+            for(int i = 0; i < size; i++)
             {
-                for(int j = i + 1; j < size; j++)
+                if(patients[i].numMedCard >= minNum && patients[i].numMedCard <= maxNum)
                 {
-                    if(med[i].numMedCard > med[j].numMedCard)
-                    {
-                        Patient temp = med[i];
-                        med[i] = med[j];
-                        med[j] = temp;
-                    }
+                    System.out.println(patients[i].id + ".\nName: " + patients[i].name + "\nMiddlename: " + patients[i].middlename + "\nSurname: "  + patients[i].surname + "\nThe number of medical card: " + patients[i].numMedCard);
                 }
             }
+            return;
         }
-        System.out.println("\nThe list of number of medical cards:\n");
-        for(int i = 0; i < size; i++)
-        {
-            System.out.println(med[i].id + ".\nName: " + med[i].name + "\nMiddlename: " + med[i].middlename + "\nSurname: "  + med[i].surname + "\nThe number of medical card: " + med[i].numMedCard);
-        }
+        System.out.println("Error of interval");
     }
     public void showNonInsurance(Patient[] patients)
     {
