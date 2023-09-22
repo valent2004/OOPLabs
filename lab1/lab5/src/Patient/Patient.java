@@ -96,5 +96,5 @@ public class Patient  implements Serializable
     }
     private void setErr(Boolean err){this.err = err;}
     public Boolean getErr(){return err;}
-    public int getSize(){return size;}
+
 }
