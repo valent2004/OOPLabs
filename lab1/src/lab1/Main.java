@@ -1,5 +1,4 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+package lab1;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
