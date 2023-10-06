@@ -5,20 +5,20 @@ import java.util.*;
 public class PatientsList {
     private List<Patient> patientsList;
 
-    public PatientsList() {
-        patientsList = new ArrayList<>();
-    }
+    public PatientsList() {patientsList = new ArrayList<>();}
 
-    public void setPatientsList(List<Patient> patientsList){this.patientsList = patientsList;}
+    public void setPatientList(List<Patient> patientsList){this.patientsList = patientsList;}
+
+    public void setPatient(Patient patient){patientsList.add(patient);}
 
     public List<Patient> getPatientsList(){return patientsList;}
 
-    public ArrayList<Patient> initArray() {
-        ArrayList<Patient> patients = new ArrayList<Patient>(100);
+    public void initArray() {
+        List<Patient> patients = new ArrayList<Patient>(100);
         patients.add(new Patient("Pankiv", "Valentyn", "Victor", "Kozazhka, 6", 689246864, 19, Insurance.Stationary, "First degree burn"));
         patients.add(new Patient("Slobodian", "Ruslan", "Olesh", "Sumonenka, 7", 976604825, 28, Insurance.Urgent, "First degree burn"));
         patients.add(new Patient("Mahinskyy", "Ura", "Andriy", "Zluky, 3", 689491192, 10, Insurance.None, "Fracture of two arms"));
-        return patients;
+        patientsList = patients;
     }
 
     public void showDiagnosis() {
@@ -67,29 +67,19 @@ public class PatientsList {
         }
     }
 
-    public ArrayList<Patient> addNewPatients(Scanner sss){
-        ArrayList<Patient> patient = new ArrayList<Patient>(100);
-        for (Patient patients : patientsList) {
-            if (patients != null)
-            {
-                patient.add(patients);
-            }
-        }
-        System.out.println("Do you want to add patient?(y/n)");
-        char yes = sss.next().charAt(0);
-        while (yes == 'y' || yes == 'Y') {
-            String surname = sss.next();
-            String name = sss.next();
-            String middlename = sss.next();
-            String adress = sss.next();
-            int phone = sss.nextInt();
-            int numMed = sss.nextInt();
-            String insurance = sss.next();
-            String diagnos = sss.next();
-            patient.add(new Patient(surname, name, middlename, adress, phone, numMed, settingInsurance(insurance), diagnos));
-            System.out.println("Continue?(y/n)");
-            yes = sss.next().charAt(0);
-        }
+    public Patient addNewPatients(Scanner sss){
+        Patient patient = new Patient();
+        String surname = sss.next();
+        String name = sss.next();
+        String middlename = sss.next();
+        String adress = sss.next();
+        int phone = sss.nextInt();
+        int numMed = sss.nextInt();
+        String insurance = sss.next();
+        String diagnos = sss.next();
+        Insurance insurances = Insurance.None;
+        insurances = insurances.setInsurance(insurance);
+        patient = new Patient(surname, name, middlename, adress, phone, numMed, insurances, diagnos);
         return patient;
     }
 
@@ -101,35 +91,37 @@ public class PatientsList {
         {
             case 1:
                 String surname = sss.next();
-                index = settingPatient(surname, choice, index);
+                index = IndexOfPatient(surname);
                 break;
             case 2:
                 String name = sss.next();
-                index = settingPatient(name, choice, index);
+                index = IndexOfPatient(name);
                 break;
             case 3:
                 String middleName = sss.next();
-                index = settingPatient(middleName, choice, index);
+                index = IndexOfPatient(middleName);
                 break;
             case 4:
                 String address = sss.next();
-                index = settingPatient(address, choice, index);
+                index = IndexOfPatient(address);
                 break;
             case 5:
-                String NumMed = sss.next();
-                index = settingPatient(NumMed, choice, index);
+                int NumMed = sss.nextInt();
+                index = IndexOfPatient(NumMed);
                 break;
             case 6:
-                String phone = sss.next();
-                index = settingPatient(phone, choice, index);
+                int phone = sss.nextInt();
+                index = IndexOfPatient(phone);
                 break;
             case 7:
                 String insurance = sss.next();
-                index = settingPatient(settingInsurance(insurance), choice, index);
+                Insurance insurances = Insurance.None;
+                insurances = insurances.setInsurance(insurance);
+                index = IndexOfPatient(insurances);
                 break;
             case 8:
                 String diagnos = sss.next();
-                index = settingPatient(diagnos, choice, index);
+                index = IndexOfPatient(diagnos);
                 break;
             default:
                 System.out.println("Wrong choice");
@@ -169,62 +161,15 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    private Insurance settingInsurance(String str)
+    private int IndexOfPatient(String str)
     {
-        if (str.equals("Dentistry")) {
-            return Insurance.Dentistry;
-        }
-        if (str.equals("Urgent")) {
-            return Insurance.Urgent;
-        }
-        if (str.equals("OutpatientPolyclinic")) {
-            return Insurance.OutpatientPolyclinic;
-        }
-        if (str.equals("Stationary")) {
-            return Insurance.Stationary;
-        }
-        return Insurance.None;
-    }
-
-    private int settingPatient(String str, int i, int index)
-    {
+        int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                switch(i)
+                if(str.equals(patients.getSurname()) || str.equals(patients.getName()) || str.equals(patients.getMiddleName()) || str.equals(patients.getAddress()) || str.equals(patients.getDiagnosis()))
                 {
-                    case 1:
-                        if(str.equals(patients.getSurname()))
-                        {
-                            return index;
-                        }
-                        break;
-                    case 2:
-                        if(str.equals(patients.getName()))
-                        {
-                            return index;
-                        }
-                        break;
-                    case 3:
-                        if(str.equals(patients.getMiddleName()))
-                        {
-                            return index;
-                        }
-                        break;
-                    case 4:
-                        if(str.equals(patients.getAddress()))
-                        {
-                            return index;
-                        }
-                        break;
-                    case 8:
-                        if(str.equals(patients.getDiagnosis()))
-                        {
-                            return index;
-                        }
-                        break;
-                    default:
-                        break;
+                    return index;
                 }
             }
             index++;
@@ -232,27 +177,15 @@ public class PatientsList {
         return -1;
     }
 
-    private int settingPatient(int str, int i, int index)
+    private int IndexOfPatient(int str)
     {
+        int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                switch(i)
+                if(str == patients.getNumMedCard() || str == patients.getPhone())
                 {
-                    case 5:
-                        if(str == patients.getNumMedCard())
-                        {
-                            return index;
-                        }
-                        break;
-                    case 6:
-                        if(str == patients.getPhone())
-                        {
-                            return index;
-                        }
-                        break;
-                    default:
-                        break;
+                    return index;
                 }
             }
             index++;
@@ -260,21 +193,15 @@ public class PatientsList {
         return -1;
     }
 
-    private int settingPatient(Insurance str, int i, int index)
+    private int IndexOfPatient(Insurance str)
     {
+        int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                switch(i)
+                if(str == patients.getInsurance())
                 {
-                    case 7:
-                        if(str == patients.getInsurance())
-                        {
-                            return index;
-                        }
-                        break;
-                    default:
-                        break;
+                    return index;
                 }
             }
             index++;

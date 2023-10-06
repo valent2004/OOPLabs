@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:/Users/Admin/OOPLabs/lab6/src/Patients.txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:/OOPLabs/lab6/src/patient/Patients.txt"))) {
             PatientsList patientsList = new PatientsList();
-            patientsList.setPatientsList(patientsList.initArray());
+            patientsList.initArray();
             oos.flush();
             patientsList.showPatientsData();
             patientsList.showDiagnosis();
@@ -16,9 +16,9 @@ public class Main {
             patientsList.showNonInsurance();
             oos.writeObject(patientsList.getPatientsList());
             patientsList = new PatientsList();
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:/Users/Admin/OOPLabs/lab6/src/Patients.txt"))) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:/OOPLabs/lab6/src/patient/Patients.txt"))) {
                 Scanner sss = new Scanner(System.in);
-                patientsList.setPatientsList(((ArrayList<Patient>) ois.readObject()));
+                patientsList.setPatientList(((ArrayList<Patient>) ois.readObject()));
                 int menushka = patientsList.Menu(sss);
                 while(menushka != 5)
                 {
@@ -26,7 +26,7 @@ public class Main {
                     {
                         case 1:
                             oos.flush();
-                            patientsList.setPatientsList(patientsList.addNewPatients(sss));
+                            patientsList.setPatient(patientsList.addNewPatients(sss));
                             oos.writeObject(patientsList.getPatientsList());
                             break;
                         case 2:
