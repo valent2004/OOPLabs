@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:/Users/student/Desktop/sss.zip/OOPLabs/lab2+/src/patient/Patients.txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:/OOPLabs/lab5/src/Patient/Patients.txt"))) {
             PatientsList patientsList = new PatientsList();
             patientsList.setPatientsList(patientsList.initArray());
             oos.flush();
@@ -16,7 +16,7 @@ public class Main {
             patientsList.showNonInsurance();
             oos.writeObject(patientsList.getPatientsList());
             patientsList = new PatientsList();
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:/Users/student/Desktop/sss.zip/OOPLabs/lab2+/src/patient/Patients.txt"))) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:/OOPLabs/lab5/src/Patient/Patients.txt"))) {
                 Scanner sss = new Scanner(System.in);
                 patientsList.setPatientsList(((ArrayList<Patient>) ois.readObject()));
                 oos.flush();

@@ -6,55 +6,55 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:/OOPLabs/lab6/src/patient/Patients.txt"))) {
+        try {
+            Main main = new Main();
+            ObjectOutputStream oos = main.ExistingFileRead("D:/OOPLabs/lab6/src/patient/Patients.txt");
             PatientsList patientsList = new PatientsList();
-            patientsList.initArray();
-            oos.flush();
-            patientsList.showPatientsData();
-            patientsList.showDiagnosis();
-            patientsList.showNumMedCard(1, 20);
-            patientsList.showNonInsurance();
-            oos.writeObject(patientsList.getPatientsList());
+            patientsList.readOrWritePatient("D:/OOPLabs/lab6/src/patient/Patients.txt", true);
             patientsList = new PatientsList();
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:/OOPLabs/lab6/src/patient/Patients.txt"))) {
-                Scanner sss = new Scanner(System.in);
-                patientsList.setPatientList(((ArrayList<Patient>) ois.readObject()));
-                int menushka = patientsList.Menu(sss);
-                while(menushka != 5)
+            Scanner sss = new Scanner(System.in);
+            patientsList.readOrWritePatient("D:/OOPLabs/lab6/src/patient/Patients.txt", false);
+            int menushka = patientsList.Menu(sss);
+            while(menushka != 5)
+            {
+                switch(menushka)
                 {
-                    switch(menushka)
-                    {
-                        case 1:
-                            oos.flush();
-                            patientsList.setPatient(patientsList.addNewPatients(sss));
-                            oos.writeObject(patientsList.getPatientsList());
-                            break;
-                        case 2:
-                            oos.flush();
-                            int patient = patientsList.searchPatients(sss);
-                            if(patient != -1){patientsList.getPatientsList().remove(patient);}
-                            oos.writeObject(patientsList.getPatientsList());
-                            break;
-                        case 3:
-                            patientsList.showPatientsData();
-                            break;
-                        case 4:
-                            int patient2 = patientsList.searchPatients(sss);
-                            if(patient2 != -1){System.out.println(patientsList.getPatientsList().get(patient2).getID() + ".\nName: " + patientsList.getPatientsList().get(patient2).getName() + "\nMiddlename: " + patientsList.getPatientsList().get(patient2).getMiddleName() + "\nSurname: " + patientsList.getPatientsList().get(patient2).getSurname() + "\nAdress: " + patientsList.getPatientsList().get(patient2).getAddress() + "\nPhone: +380" + patientsList.getPatientsList().get(patient2).getPhone() + "\nThe number of medical card: " + patientsList.getPatientsList().get(patient2).getNumMedCard() + "\nThe insurance: " + patientsList.getPatientsList().get(patient2).getInsurance() + "\nDiagnosis: " + patientsList.getPatientsList().get(patient2).getDiagnosis());}
-                            break;
-                        default:
-                            System.out.println("The choice is not correct");
-                            break;
-                    }
-                    menushka = patientsList.Menu(sss);
+                    case 1:
+                        oos.flush();
+                        patientsList.addNewPatient(sss);
+                        oos.writeObject(patientsList.getPatientsList());
+                        break;
+                    case 2:
+                        oos.flush();
+                        int patient = patientsList.searchPatients(sss);
+                        if(patient != -1){patientsList.getPatientsList().remove(patient);}
+                        oos.writeObject(patientsList.getPatientsList());
+                        break;
+                    case 3:
+                        patientsList.showPatientsData();
+                        break;
+                    case 4:
+                        int patient2 = patientsList.searchPatients(sss);
+                        if(patient2 != -1){System.out.println(patientsList.getPatientsList().get(patient2).getID() + ".\nName: " + patientsList.getPatientsList().get(patient2).getName() + "\nMiddlename: " + patientsList.getPatientsList().get(patient2).getMiddleName() + "\nSurname: " + patientsList.getPatientsList().get(patient2).getSurname() + "\nAdress: " + patientsList.getPatientsList().get(patient2).getAddress() + "\nPhone: +380" + patientsList.getPatientsList().get(patient2).getPhone() + "\nThe number of medical card: " + patientsList.getPatientsList().get(patient2).getNumMedCard() + "\nThe insurance: " + patientsList.getPatientsList().get(patient2).getInsurance() + "\nDiagnosis: " + patientsList.getPatientsList().get(patient2).getDiagnosis());}
+                        break;
+                    default:
+                        System.out.println("The choice is not correct");
+                        break;
                 }
-            } catch (IOException err) {
-                System.out.println(err.getMessage());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                menushka = patientsList.Menu(sss);
             }
         } catch (IOException err) {
             System.out.println(err.getMessage());
         }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObjectOutputStream ExistingFileRead(String file) throws IOException
+    {
+        File files = new File(file);
+        if (files.exists()) {return new ObjectOutputStream(new FileOutputStream(files));}
+        throw new IOException("The file is not exist");
     }
 }
