@@ -1,5 +1,8 @@
 package patient;
 
+import java.io.FileOutputStream;
+import java.io.*;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class PatientsList {
@@ -67,8 +70,7 @@ public class PatientsList {
         }
     }
 
-    public Patient addNewPatients(Scanner sss){
-        Patient patient = new Patient();
+    public void addNewPatient(Scanner sss){
         String surname = sss.next();
         String name = sss.next();
         String middlename = sss.next();
@@ -79,49 +81,56 @@ public class PatientsList {
         String diagnos = sss.next();
         Insurance insurances = Insurance.None;
         insurances = insurances.setInsurance(insurance);
-        patient = new Patient(surname, name, middlename, adress, phone, numMed, insurances, diagnos);
-        return patient;
+        patientsList.add(new Patient(surname, name, middlename, adress, phone, numMed, insurances, diagnos));
     }
 
     public int searchPatients(Scanner sss)
     {
         int index = 0;
         int choice = Menu2(sss);
+        Field field = Field.Surname;
         switch (choice)
         {
             case 1:
                 String surname = sss.next();
-                index = IndexOfPatient(surname);
+                index = findPatientByField(field, surname);
                 break;
             case 2:
                 String name = sss.next();
-                index = IndexOfPatient(name);
+                field = Field.Name;
+                index = findPatientByField(field, name);
                 break;
             case 3:
                 String middleName = sss.next();
-                index = IndexOfPatient(middleName);
+                field = Field.MiddleName;
+                index = findPatientByField(field, middleName);
                 break;
             case 4:
                 String address = sss.next();
-                index = IndexOfPatient(address);
+                field = Field.Address;
+                index = findPatientByField(field, address);
                 break;
             case 5:
                 int NumMed = sss.nextInt();
-                index = IndexOfPatient(NumMed);
+                field = Field.NumMed;
+                index = findPatientByField(field, NumMed);
                 break;
             case 6:
                 int phone = sss.nextInt();
-                index = IndexOfPatient(phone);
+                field = Field.Phone;
+                index = findPatientByField(field, phone);
                 break;
             case 7:
                 String insurance = sss.next();
+                field = Field.Insurance;
                 Insurance insurances = Insurance.None;
                 insurances = insurances.setInsurance(insurance);
-                index = IndexOfPatient(insurances);
+                index = findPatientByField(field, insurances);
                 break;
             case 8:
                 String diagnos = sss.next();
-                index = IndexOfPatient(diagnos);
+                field = Field.Diagnosis;
+                index = findPatientByField(field, diagnos);
                 break;
             default:
                 System.out.println("Wrong choice");
@@ -161,44 +170,63 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    private int IndexOfPatient(String str)
+    private int findPatientByField(Field field, Object str)
     {
         int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                if(str.equals(patients.getSurname()) || str.equals(patients.getName()) || str.equals(patients.getMiddleName()) || str.equals(patients.getAddress()) || str.equals(patients.getDiagnosis()))
+                switch(field)
                 {
-                    return index;
+                    case Surname:
+                        if(str.equals(patients.getSurname()))
+                        {
+                            return index;
+                        }
+                        break;
+                    case Name:
+                        if(str.equals(patients.getName()))
+                        {
+                            return index;
+                        }
+                        break;
+                    case MiddleName:
+                        if(str.equals(patients.getMiddleName()))
+                        {
+                            return index;
+                        }
+                        break;
+                    case Address:
+                        if(str.equals(patients.getAddress()))
+                        {
+                            return index;
+                        }
+                        break;
+                    case NumMed:
+                        if((int)str == patients.getNumMedCard())
+                        {
+                            return index;
+                        }
+                        break;
+                    case Phone:
+                        if((int)str == patients.getPhone())
+                        {
+                            return index;
+                        }
+                        break;
+                    case Insurance:
+                        if(str == patients.getInsurance())
+                        {
+                            return index;
+                        }
+                        break;
+                    case Diagnosis:
+                        if(str.equals(patients.getDiagnosis()))
+                        {
+                            return index;
+                        }
+                        break;
                 }
-            }
-            index++;
-        }
-        return -1;
-    }
-
-    private int IndexOfPatient(int str)
-    {
-        int index = 0;
-        for (Patient patients : patientsList) {
-            if (patients != null)
-            {
-                if(str == patients.getNumMedCard() || str == patients.getPhone())
-                {
-                    return index;
-                }
-            }
-            index++;
-        }
-        return -1;
-    }
-
-    private int IndexOfPatient(Insurance str)
-    {
-        int index = 0;
-        for (Patient patients : patientsList) {
-            if (patients != null)
-            {
                 if(str == patients.getInsurance())
                 {
                     return index;
@@ -207,5 +235,30 @@ public class PatientsList {
             index++;
         }
         return -1;
+    }
+
+    public void readOrWritePatient(String file, boolean rOrW) throws IOException, ClassNotFoundException {
+        File files = new File(file);
+        if (files.exists())
+        {
+            if(rOrW)
+            {
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(files));
+                initArray();
+                oos.flush();
+                showPatientsData();
+                showDiagnosis();
+                showNumMedCard(1, 20);
+                showNonInsurance();
+                oos.writeObject(getPatientsList());
+            }
+            else
+            {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(files));
+                setPatientList(((ArrayList<Patient>) ois.readObject()));
+            }
+            return;
+        }
+        throw new IOException("The file is not exist");
     }
 }
