@@ -124,8 +124,7 @@ public class PatientsList {
                 String insurance = sss.next();
                 field = Field.Insurance;
                 Insurance insurances = Insurance.None;
-                insurances = insurances.setInsurance(insurance);
-                index = findPatientByField(field, insurances);
+                index = findPatientByField(field, insurances.setInsurance(insurance));
                 break;
             case 8:
                 String diagnos = sss.next();
@@ -170,52 +169,52 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    private int findPatientByField(Field field, Object str)
+    private int findPatientByField(Field fieldName, Object searchedValue)
     {
         int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                switch(field)
+                switch(fieldName)
                 {
                     case Surname:
-                        if(str.equals(patients.getSurname()))
+                        if(searchedValue.equals(patients.getSurname()))
                         {
                             return index;
                         }
                         break;
                     case Name:
-                        if(str.equals(patients.getName()))
+                        if(searchedValue.equals(patients.getName()))
                         {
                             return index;
                         }
                         break;
                     case MiddleName:
-                        if(str.equals(patients.getMiddleName()))
+                        if(searchedValue.equals(patients.getMiddleName()))
                         {
                             return index;
                         }
                         break;
                     case Address:
-                        if(str.equals(patients.getAddress()))
+                        if(searchedValue.equals(patients.getAddress()))
                         {
                             return index;
                         }
                         break;
                     case NumMed:
-                        if((int)str == patients.getNumMedCard())
+                        if((int)searchedValue == patients.getNumMedCard())
                         {
                             return index;
                         }
                         break;
                     case Phone:
-                        if((int)str == patients.getPhone())
+                        if((int)searchedValue == patients.getPhone())
                         {
                             return index;
                         }
                         break;
                     case Insurance:
-                        if(str == patients.getInsurance())
+                        if(searchedValue == patients.getInsurance())
                         {
                             return index;
                         }
@@ -227,7 +226,7 @@ public class PatientsList {
                         }
                         break;
                 }
-                if(str == patients.getInsurance())
+                if(searchedValue == patients.getInsurance())
                 {
                     return index;
                 }
