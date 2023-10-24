@@ -11,4 +11,3 @@ public enum Field
     Insurance,
     Diagnosis;
 }
-
