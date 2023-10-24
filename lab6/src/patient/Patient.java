@@ -1,25 +1,25 @@
-package Patient;
+package patient;
 
 import java.io.*;
 
 public class Patient implements Serializable {
     private static int size = 0;
-    private int id;
-    private String surname;
-    private String name;
-    private String middleName;
-    private String address;
-    private int phone;
-    private int numMedCard;
-    private Insurance insurance;
-    private String diagnosis;
+    private int id = 0;
+    private String surname = "";
+    private String name = "";
+    private String middleName = "";
+    private String address = "";
+    private int phone = 0;
+    private int numMedCard = 0;
+    private Insurance insurance = Insurance.None;
+    private String diagnosis = "";
 
-    public Patient(String surname, String name, String middlename, String adress, int phone, int numMedCard, Insurance insurance, String diagnosis) {
+    public Patient(String surname, String name, String middleName, String address, int phone, int numMedCard, Insurance insurance, String diagnosis) {
         id = ++size;
         this.surname = surname;
         this.name = name;
-        this.middleName = middlename;
-        this.address = adress;
+        this.middleName = middleName;
+        this.address = address;
         this.phone = phone;
         this.numMedCard = numMedCard;
         this.insurance = insurance;
@@ -62,3 +62,4 @@ public class Patient implements Serializable {
         return diagnosis;
     }
 }
+

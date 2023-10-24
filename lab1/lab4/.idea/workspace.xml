@@ -4,13 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34b4e10a-0929-41c3-bc6d-544f03251f28" name="Changes" comment="" />
+    <list default="true" id="34b4e10a-0929-41c3-bc6d-544f03251f28" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../lab2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/lab2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/patient/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/src/patient/Patient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/lab3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/lab5.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/src/Patient/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/src/Patient/Patient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab5/src/Patient/Patients.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab3/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab3/src/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="lab5++" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo">{
@@ -26,7 +59,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "lab4",
+    "git-widget-placeholder": "lab4++",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -44,6 +77,7 @@
       <updated>1695114200590</updated>
       <workItem from="1695114206315" duration="1542000" />
       <workItem from="1695314844244" duration="82000" />
+      <workItem from="1696238278866" duration="545000" />
     </task>
     <servers />
   </component>
