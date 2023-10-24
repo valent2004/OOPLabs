@@ -62,4 +62,3 @@ public class Patient implements Serializable {
         return diagnosis;
     }
 }
-
