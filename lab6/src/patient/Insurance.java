@@ -7,18 +7,18 @@ public enum Insurance
     OutpatientPolyclinic,
     Stationary,
     Dentistry;
-    public Insurance setInsurance(String str)
+    public Insurance setInsurance(String value)
     {
-        if (str.equals("Dentistry")) {
+        if (value.equals("Dentistry")) {
             return Insurance.Dentistry;
         }
-        if (str.equals("Urgent")) {
+        if (value.equals("Urgent")) {
             return Insurance.Urgent;
         }
-        if (str.equals("OutpatientPolyclinic")) {
+        if (value.equals("OutpatientPolyclinic")) {
             return Insurance.OutpatientPolyclinic;
         }
-        if (str.equals("Stationary")) {
+        if (value.equals("Stationary")) {
             return Insurance.Stationary;
         }
         return Insurance.None;

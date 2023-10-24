@@ -10,10 +10,10 @@ public class Main {
             Main main = new Main();
             ObjectOutputStream oos = main.ExistingFileRead("D:/OOPLabs/lab6/src/patient/Patients.txt");
             PatientsList patientsList = new PatientsList();
-            patientsList.readOrWritePatient("D:/OOPLabs/lab6/src/patient/Patients.txt", true);
+            patientsList.writePatient("D:/OOPLabs/lab6/src/patient/Patients.txt");
             patientsList = new PatientsList();
             Scanner sss = new Scanner(System.in);
-            patientsList.readOrWritePatient("D:/OOPLabs/lab6/src/patient/Patients.txt", false);
+            patientsList.readPatient("D:/OOPLabs/lab6/src/patient/Patients.txt");
             int menushka = patientsList.Menu(sss);
             while(menushka != 5)
             {
@@ -51,10 +51,10 @@ public class Main {
         }
     }
 
-    public ObjectOutputStream ExistingFileRead(String file) throws IOException
+    public ObjectOutputStream ExistingFileRead(String filename) throws IOException
     {
-        File files = new File(file);
-        if (files.exists()) {return new ObjectOutputStream(new FileOutputStream(files));}
+        File file = new File(filename);
+        if (file.exists()) {return new ObjectOutputStream(new FileOutputStream(file));}
         throw new IOException("The file is not exist");
     }
 }

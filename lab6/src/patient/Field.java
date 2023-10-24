@@ -6,7 +6,7 @@ public enum Field
     Name,
     MiddleName,
     Address,
-    NumMed,
+    NumMedCard,
     Phone,
     Insurance,
     Diagnosis;

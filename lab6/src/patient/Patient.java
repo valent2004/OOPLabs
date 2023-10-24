@@ -4,15 +4,15 @@ import java.io.*;
 
 public class Patient implements Serializable {
     private static int size = 0;
-    private int id;
-    private String surname;
-    private String name;
-    private String middleName;
-    private String address;
-    private int phone;
-    private int numMedCard;
-    private Insurance insurance;
-    private String diagnosis;
+    private int id = 0;
+    private String surname = "";
+    private String name = "";
+    private String middleName = "";
+    private String address = "";
+    private int phone = 0;
+    private int numMedCard = 0;
+    private Insurance insurance = Insurance.None;
+    private String diagnosis = "";
 
     public Patient(String surname, String name, String middlename, String adress, int phone, int numMedCard, Insurance insurance, String diagnosis) {
         id = ++size;
@@ -24,10 +24,6 @@ public class Patient implements Serializable {
         this.numMedCard = numMedCard;
         this.insurance = insurance;
         this.diagnosis = diagnosis;
-    }
-
-    public Patient() {
-
     }
 
     int getID() {

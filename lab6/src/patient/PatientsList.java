@@ -112,7 +112,7 @@ public class PatientsList {
                 break;
             case 5:
                 int NumMed = sss.nextInt();
-                field = Field.NumMed;
+                field = Field.NumMedCard;
                 index = findPatientByField(field, NumMed);
                 break;
             case 6:
@@ -170,64 +170,64 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    private int findPatientByField(Field field, Object str)
+    private int findPatientByField(Field fieldName, Object searchedValue)
     {
         int index = 0;
         for (Patient patients : patientsList) {
             if (patients != null)
             {
-                switch(field)
+                switch(fieldName)
                 {
                     case Surname:
-                        if(str.equals(patients.getSurname()))
+                        if(searchedValue.equals(patients.getSurname()))
                         {
                             return index;
                         }
                         break;
                     case Name:
-                        if(str.equals(patients.getName()))
+                        if(searchedValue.equals(patients.getName()))
                         {
                             return index;
                         }
                         break;
                     case MiddleName:
-                        if(str.equals(patients.getMiddleName()))
+                        if(searchedValue.equals(patients.getMiddleName()))
                         {
                             return index;
                         }
                         break;
                     case Address:
-                        if(str.equals(patients.getAddress()))
+                        if(searchedValue.equals(patients.getAddress()))
                         {
                             return index;
                         }
                         break;
-                    case NumMed:
-                        if((int)str == patients.getNumMedCard())
+                    case NumMedCard:
+                        if((int)searchedValue == patients.getNumMedCard())
                         {
                             return index;
                         }
                         break;
                     case Phone:
-                        if((int)str == patients.getPhone())
+                        if((int)searchedValue == patients.getPhone())
                         {
                             return index;
                         }
                         break;
                     case Insurance:
-                        if(str == patients.getInsurance())
+                        if(searchedValue == patients.getInsurance())
                         {
                             return index;
                         }
                         break;
                     case Diagnosis:
-                        if(str.equals(patients.getDiagnosis()))
+                        if(searchedValue.equals(patients.getDiagnosis()))
                         {
                             return index;
                         }
                         break;
                 }
-                if(str == patients.getInsurance())
+                if(searchedValue == patients.getInsurance())
                 {
                     return index;
                 }
@@ -237,26 +237,29 @@ public class PatientsList {
         return -1;
     }
 
-    public void readOrWritePatient(String file, boolean rOrW) throws IOException, ClassNotFoundException {
-        File files = new File(file);
-        if (files.exists())
+    public void writePatient(String filename) throws IOException, ClassNotFoundException {
+        File file = new File(filename);
+        if (file.exists())
         {
-            if(rOrW)
-            {
-                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(files));
-                initArray();
-                oos.flush();
-                showPatientsData();
-                showDiagnosis();
-                showNumMedCard(1, 20);
-                showNonInsurance();
-                oos.writeObject(getPatientsList());
-            }
-            else
-            {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(files));
-                setPatientList(((ArrayList<Patient>) ois.readObject()));
-            }
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            initArray();
+            oos.flush();
+            showPatientsData();
+            showDiagnosis();
+            showNumMedCard(1, 20);
+            showNonInsurance();
+            oos.writeObject(getPatientsList());
+            return;
+        }
+        throw new IOException("The file is not exist");
+    }
+
+    public void readPatient(String filename) throws IOException, ClassNotFoundException {
+        File file = new File(filename);
+        if (file.exists())
+        {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            setPatientList(((ArrayList<Patient>) ois.readObject()));
             return;
         }
         throw new IOException("The file is not exist");
