@@ -237,8 +237,8 @@ public class PatientsList {
         return -1;
     }
 
-    public void writePatient(String filename) throws IOException, ClassNotFoundException {
-        File file = new File(filename);
+    public void writePatient(String fileName) throws IOException, ClassNotFoundException {
+        File file = new File(fileName);
         if (file.exists())
         {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
@@ -254,8 +254,8 @@ public class PatientsList {
         throw new IOException("The file is not exist");
     }
 
-    public void readPatient(String filename) throws IOException, ClassNotFoundException {
-        File file = new File(filename);
+    public void readPatient(String fileName) throws IOException, ClassNotFoundException {
+        File file = new File(fileName);
         if (file.exists())
         {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));

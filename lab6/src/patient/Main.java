@@ -51,9 +51,9 @@ public class Main {
         }
     }
 
-    public ObjectOutputStream ExistingFileRead(String filename) throws IOException
+    public ObjectOutputStream ExistingFileRead(String fileName) throws IOException
     {
-        File file = new File(filename);
+        File file = new File(fileName);
         if (file.exists()) {return new ObjectOutputStream(new FileOutputStream(file));}
         throw new IOException("The file is not exist");
     }

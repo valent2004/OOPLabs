@@ -14,12 +14,12 @@ public class Patient implements Serializable {
     private Insurance insurance = Insurance.None;
     private String diagnosis = "";
 
-    public Patient(String surname, String name, String middlename, String adress, int phone, int numMedCard, Insurance insurance, String diagnosis) {
+    public Patient(String surname, String name, String middleName, String address, int phone, int numMedCard, Insurance insurance, String diagnosis) {
         id = ++size;
         this.surname = surname;
         this.name = name;
-        this.middleName = middlename;
-        this.address = adress;
+        this.middleName = middleName;
+        this.address = address;
         this.phone = phone;
         this.numMedCard = numMedCard;
         this.insurance = insurance;
