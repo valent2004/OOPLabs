@@ -58,4 +58,3 @@ public class Main {
         throw new IOException("The file is not exist");
     }
 }
-
