@@ -1,7 +1,6 @@
-package patient2;
+package org.example;
 
-public enum Field
-{
+public enum Field {
     Surname,
     Name,
     MiddleName,

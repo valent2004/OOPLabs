@@ -1,4 +1,4 @@
-package patient2;
+package org.example;
 
 import java.io.FileOutputStream;
 import java.io.*;
@@ -8,21 +8,25 @@ import java.util.*;
 public class PatientsList {
     private Map<Integer, Patient> patientsList;
 
-    public PatientsList() {patientsList = new HashMap<>();}
+    public PatientsList() {
+        patientsList = new HashMap<>();
+    }
 
-    public void setPatientList(Map<Integer, Patient> patientsList){this.patientsList = patientsList;}
+    public void setPatientList(Map<Integer, Patient> patientsList) {
+        this.patientsList = patientsList;
+    }
 
-    public Map<Integer, Patient> getPatientsList(){return patientsList;}
+    public Map<Integer, Patient> getPatientsList() {
+        return patientsList;
+    }
 
     public void initArray() {
-        Map<Integer, Patient> patients = new HashMap<Integer, Patient>(100);
         Patient p = new Patient("Pankiv", "Valentyn", "Victor", "Kozazhka, 6", 689246864, 19, Insurance.Stationary, "First degree burn");
-        patients.put(p.getID(), p);
+        patientsList.put(p.getID(), p);
         p = new Patient("Slobodian", "Ruslan", "Olesh", "Sumonenka, 7", 976604825, 28, Insurance.Urgent, "First degree burn");
-        patients.put(p.getID(), p);
+        patientsList.put(p.getID(), p);
         p = new Patient("Mahinskyy", "Ura", "Andriy", "Zluky, 3", 689491192, 10, Insurance.None, "Fracture of two arms");
-        patients.put(p.getID(), p);
-        patientsList = patients;
+        patientsList.put(p.getID(), p);
     }
 
     public void showDiagnosis(Map<Integer, Patient> cur) {
@@ -49,30 +53,23 @@ public class PatientsList {
         }
     }
 
-    public void showNumMedCardASC()
-    {
-        Map<Integer, Patient> test = new HashMap<Integer, Patient>(patientsList.size());
-        for (Patient patient : patientsList.values())
-        {
-            if (patient != null)
-            {
+    public void showNumMedCardASC() {
+        Map<Integer, Patient> test = new HashMap<>(patientsList.size());
+        for (Patient patient : patientsList.values()) {
+            if (patient != null) {
                 test.put(patient.getID(), patient);
             }
         }
-        Integer index = 0, outIndex = 0;
-        for(Patient patient : test.values())
-        {
-            if (patient != null)
-            {
-                for(Patient patientSort : test.values())
-                {
-                    if (patientSort != null)
-                    {
-                        if(outIndex < index)
-                        {
+        int index = 0, outIndex = 0;
+        for (Patient patient : test.values()) {
+            if (patient != null) {
+                for (Patient patientSort : test.values()) {
+                    if (patientSort != null) {
+                        if (outIndex < index) {
 
+                        } else {
+                            outIndex++;
                         }
-                        else{outIndex++;}
                     }
                 }
                 outIndex = 0;
@@ -93,19 +90,21 @@ public class PatientsList {
         }
     }*/
 
-    public void searchDiagnosis(Scanner sss)
-    {
-        Map<Integer, Patient> searchedPatients = new HashMap<Integer, Patient> (patientsList.size());
+    public void searchDiagnosis(Scanner sss) {
+        Map<Integer, Patient> searchedPatients = new HashMap<>(patientsList.size());
         String diagnosis = sss.next();
-        for (Patient patient : patientsList.values())
-        {
-            if (patient != null)
-            {
-                if(patient.getDiagnosis() == diagnosis){searchedPatients.put(patient.getID(), patient);}
+        for (Patient patient : patientsList.values()) {
+            if (patient != null) {
+                if (patient.getDiagnosis().equalsIgnoreCase(diagnosis)) {
+                    searchedPatients.put(patient.getID(), patient);
+                }
             }
         }
-        if(searchedPatients != null) {showDiagnosis(searchedPatients);}
-        else {System.out.println("You dont have any patients with that diagnosis!");}
+        if (searchedPatients != null) {
+            showDiagnosis(searchedPatients);
+        } else {
+            System.out.println("You dont have any patients with that diagnosis!");
+        }
     }
 
     public void showNonInsurance() {
@@ -130,7 +129,7 @@ public class PatientsList {
         }
     }
 
-    public void addNewPatient(Scanner sss){
+    public void addNewPatient(Scanner sss) {
         String surname = sss.next();
         String name = sss.next();
         String middlename = sss.next();
@@ -145,65 +144,63 @@ public class PatientsList {
         patientsList.put(p.getID(), p);
     }
 
-    public int searchPatients(Scanner sss)
-    {
+    public int searchPatients(Scanner sss) {
         int index = 0;
         int choice = Menu2(sss);
         Field field = Field.Surname;
-        switch (choice)
-        {
-            case 1:
+        switch (choice) {
+            case 1 -> {
                 String surname = sss.next();
                 index = findPatientByField(field, surname);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 String name = sss.next();
                 field = Field.Name;
                 index = findPatientByField(field, name);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 String middleName = sss.next();
                 field = Field.MiddleName;
                 index = findPatientByField(field, middleName);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 String address = sss.next();
                 field = Field.Address;
                 index = findPatientByField(field, address);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 int NumMed = sss.nextInt();
                 field = Field.NumMedCard;
                 index = findPatientByField(field, NumMed);
-                break;
-            case 6:
+            }
+            case 6 -> {
                 int phone = sss.nextInt();
                 field = Field.Phone;
                 index = findPatientByField(field, phone);
-                break;
-            case 7:
+            }
+            case 7 -> {
                 String insurance = sss.next();
                 field = Field.Insurance;
                 Insurance insurances = Insurance.None;
                 insurances = insurances.setInsurance(insurance);
                 index = findPatientByField(field, insurances);
-                break;
-            case 8:
+            }
+            case 8 -> {
                 String diagnos = sss.next();
                 field = Field.Diagnosis;
                 index = findPatientByField(field, diagnos);
-                break;
-            default:
-                System.out.println("Wrong choice");
-                break;
+            }
+            default -> System.out.println("Wrong choice");
         }
-        if(index != -1) {System.out.println("We found the patient");}
-        else{System.out.println("We don't find the patient yet!");}
+        if (index != -1) {
+            System.out.println("We found the patient");
+        } else {
+            System.out.println("We don't find the patient yet!");
+        }
         return index;
     }
 
-    public int Menu(Scanner sss)
-    {
+    public int Menu(Scanner sss) {
         System.out.println("\nEnter your choice:");
         System.out.println("1-Add patient");
         System.out.println("2-Delete patient");
@@ -219,8 +216,7 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    public int Menu2(Scanner sss)
-    {
+    public int Menu2(Scanner sss) {
         System.out.println("\nEnter your searching type:");
         System.out.println("1-Surname");
         System.out.println("2-Name");
@@ -233,65 +229,53 @@ public class PatientsList {
         return sss.nextInt();
     }
 
-    private int findPatientByField(Field fieldName, Object searchedValue)
-    {
+    private int findPatientByField(Field fieldName, Object searchedValue) {
         int index = 0;
         for (Patient patients : patientsList.values()) {
-            if (patients != null)
-            {
-                switch(fieldName)
-                {
+            if (patients != null) {
+                switch (fieldName) {
                     case Surname:
-                        if(searchedValue.equals(patients.getSurname()))
-                        {
+                        if (searchedValue.equals(patients.getSurname())) {
                             return index;
                         }
                         break;
                     case Name:
-                        if(searchedValue.equals(patients.getName()))
-                        {
+                        if (searchedValue.equals(patients.getName())) {
                             return index;
                         }
                         break;
                     case MiddleName:
-                        if(searchedValue.equals(patients.getMiddleName()))
-                        {
+                        if (searchedValue.equals(patients.getMiddleName())) {
                             return index;
                         }
                         break;
                     case Address:
-                        if(searchedValue.equals(patients.getAddress()))
-                        {
+                        if (searchedValue.equals(patients.getAddress())) {
                             return index;
                         }
                         break;
                     case NumMedCard:
-                        if((int)searchedValue == patients.getNumMedCard())
-                        {
+                        if ((int) searchedValue == patients.getNumMedCard()) {
                             return index;
                         }
                         break;
                     case Phone:
-                        if((int)searchedValue == patients.getPhone())
-                        {
+                        if ((int) searchedValue == patients.getPhone()) {
                             return index;
                         }
                         break;
                     case Insurance:
-                        if(searchedValue == patients.getInsurance())
-                        {
+                        if (searchedValue == patients.getInsurance()) {
                             return index;
                         }
                         break;
                     case Diagnosis:
-                        if(searchedValue.equals(patients.getDiagnosis()))
-                        {
+                        if (searchedValue.equals(patients.getDiagnosis())) {
                             return index;
                         }
                         break;
                 }
-                if(searchedValue == patients.getInsurance())
-                {
+                if (searchedValue == patients.getInsurance()) {
                     return index;
                 }
             }
@@ -302,8 +286,7 @@ public class PatientsList {
 
     public void writePatient(String fileName) throws IOException, ClassNotFoundException {
         File file = new File(fileName);
-        if (file.exists())
-        {
+        if (file.exists()) {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
             initArray();
             oos.flush();
@@ -317,8 +300,7 @@ public class PatientsList {
 
     public void readPatient(String fileName) throws IOException, ClassNotFoundException {
         File file = new File(fileName);
-        if (file.exists())
-        {
+        if (file.exists()) {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             setPatientList(((Map<Integer, Patient>) ois.readObject()));
             return;

@@ -1,18 +1,18 @@
-package patient2;
+package org.example;
 
 import java.io.*;
 
 public class Patient implements Serializable {
     private static int size = 0;
-    private int id = 0;
-    private String surname = "";
-    private String name = "";
-    private String middleName = "";
-    private String address = "";
-    private int phone = 0;
-    private int numMedCard = 0;
-    private Insurance insurance = Insurance.None;
-    private String diagnosis = "";
+    private int id;
+    private String surname;
+    private String name;
+    private String middleName;
+    private String address;
+    private int phone;
+    private int numMedCard;
+    private Insurance insurance;
+    private String diagnosis;
 
     public Patient(String surname, String name, String middleName, String address, int phone, int numMedCard, Insurance insurance, String diagnosis) {
         id = ++size;

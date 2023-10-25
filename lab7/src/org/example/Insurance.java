@@ -1,4 +1,4 @@
-package patient2;
+package org.example;
 
 public enum Insurance
 {
@@ -7,6 +7,7 @@ public enum Insurance
     OutpatientPolyclinic,
     Stationary,
     Dentistry;
+
     public Insurance setInsurance(String searchedValue)
     {
         if (searchedValue.equals("Dentistry")) {

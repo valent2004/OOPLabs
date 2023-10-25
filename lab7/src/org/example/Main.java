@@ -1,7 +1,6 @@
-package patient2;// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+package org.example;
+
 import java.io.*;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -15,10 +14,8 @@ public class Main {
             Scanner sss = new Scanner(System.in);
             patientsList.readPatient("C:/Users/student/OOPLabs/lab7/src/patient2/Patients.txt");
             int menushka = patientsList.Menu(sss);
-            while(menushka != 11)
-            {
-                switch(menushka)
-                {
+            while (menushka != 11) {
+                switch (menushka) {
                     case 1:
                         oos.flush();
                         patientsList.addNewPatient(sss);
@@ -27,7 +24,9 @@ public class Main {
                     case 2:
                         oos.flush();
                         int patient = patientsList.searchPatients(sss);
-                        if(patient != -1){patientsList.getPatientsList().remove(patientsList.getPatientsList().keySet().toArray()[patient], patientsList.getPatientsList().get(patientsList.getPatientsList().keySet().toArray()[patient]));}
+                        if (patient != -1) {
+                            patientsList.getPatientsList().remove(patientsList.getPatientsList().keySet().toArray()[patient], patientsList.getPatientsList().get(patientsList.getPatientsList().keySet().toArray()[patient]));
+                        }
                         oos.writeObject(patientsList.getPatientsList());
                         break;
                     case 3:
@@ -35,8 +34,7 @@ public class Main {
                         break;
                     case 4:
                         int patient2 = patientsList.searchPatients(sss);
-                        if(patient2 != -1)
-                        {
+                        if (patient2 != -1) {
                             Patient curPatient = patientsList.getPatientsList().get(patientsList.getPatientsList().keySet().toArray()[patient2]);
                             System.out.println(patientsList.getPatientsList().keySet().toArray()[patient2] + ".\nName: " + curPatient.getName() + "\nMiddlename: " + curPatient.getMiddleName() + "\nSurname: " + curPatient.getSurname() + "\nAdress: " + curPatient.getAddress() + "\nPhone: +380" + curPatient.getPhone() + "\nThe number of medical card: " + curPatient.getNumMedCard() + "\nThe insurance: " + curPatient.getInsurance() + "\nDiagnosis: " + curPatient.getDiagnosis());
                         }
@@ -44,8 +42,8 @@ public class Main {
                     case 5:
                         break;
                     case 6:
-                        Integer a = sss.nextInt(), b = sss.nextInt();
-                        patientsList.showNumMedCard(a,b);
+                        int a = sss.nextInt(), b = sss.nextInt();
+                        patientsList.showNumMedCard(a, b);
                         break;
                     case 7:
                         patientsList.showNonInsurance();
@@ -65,16 +63,16 @@ public class Main {
             }
         } catch (IOException err) {
             System.out.println(err.getMessage());
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public ObjectOutputStream ExistingFileRead(String fileName) throws IOException
-    {
+    public ObjectOutputStream ExistingFileRead(String fileName) throws IOException {
         File file = new File(fileName);
-        if (file.exists()) {return new ObjectOutputStream(new FileOutputStream(file));}
+        if (file.exists()) {
+            return new ObjectOutputStream(new FileOutputStream(file));
+        }
         throw new IOException("The file is not exist");
     }
 }
